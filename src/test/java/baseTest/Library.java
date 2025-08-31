@@ -1,6 +1,7 @@
 package baseTest;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -13,7 +14,7 @@ import java.net.URL;
 public class Library {
     public static ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
     //private AppiumDriver driver;
-
+    String text;
 
     @BeforeTest
     public void PreReq() throws MalformedURLException {
@@ -35,6 +36,14 @@ public class Library {
         driver.get().findElement(By.xpath("//android.widget.TextView[@text=\"Cart\"]")).click();
         // driver.findElement(By.xpath("//android.widget.TextView[@text=\"Cart\"]")).click();
         // driver.get().findElement()
+        driver.get().findElement(MobileBy.androidUIAutomator("new UiSelector().text(\"Place Order \")")).click();
+        text=driver.get().findElement(By.xpath("//android.widget.TextView[@text=\"Continue \"]")).getText();
+        System.out.println(text);
+        if(text.equals("Continue ")){
+            System.out.println("pass");
+        }else{
+            System.out.println("fail");
+        }
     }
 
 
