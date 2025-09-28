@@ -43,4 +43,22 @@ public class CommonUtils {
         return currentDateTime.format(formatter);
     }
 
+
+    public void tapObject(WebElement webElement,String reportInfo){
+        webElement.click();
+        node.info("Clicked On ["+  reportInfo+"]");
+
+    }
+
+    public void inputMethod(WebElement webElement,String reportInfo,String inputValues){
+        webElement.sendKeys(inputValues);
+        node.info("Entered ["+inputValues+"] On ["+  reportInfo+"]");
+    }
+
+    public void getElementValues(WebElement webElement,String reportInfo){
+        webElement.getText();
+        node.info("Fetched value  ["+  reportInfo+"]");
+    }
+
+
 }

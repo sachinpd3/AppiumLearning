@@ -4,7 +4,11 @@
     <test name="First">
         <classes>
             <class name="BaseClass.Hooks"></class>
-            <class name="TestSuite.CartProceed"></class>
+
+         <class name="TestSuite.CartProceed"></class>
+          <!--<class name="TestSuite.CartProceeddataProvider">-->
+
+
         </classes>
     </test>
 
