@@ -3,11 +3,19 @@ package Utils;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+//import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import static BaseClass.Hooks.driver;
 
 public class CommonUtils {
     public static ExtentSparkReporter spark;
@@ -55,9 +63,27 @@ public class CommonUtils {
         node.info("Entered ["+inputValues+"] On ["+  reportInfo+"]");
     }
 
-    public void getElementValues(WebElement webElement,String reportInfo){
-        webElement.getText();
+    public String  getElementValues(WebElement webElement,String reportInfo){
+       String text= webElement.getText();
         node.info("Fetched value  ["+  reportInfo+"]");
+        return text;
+    }
+
+
+
+    public  void scrollToElement(AppiumDriver driver, String text) {
+        try {
+            driver.findElement(MobileBy.AndroidUIAutomator(
+                    "new UiScrollable(new UiSelector().scrollable(true))" +
+                            ".scrollIntoView(new UiSelector().text(\"" + text + "\"))"));
+
+        } catch (Exception e) {
+          //  logInfo("Element not found: " + text);
+        }
+    }
+    public static String getBase64(AppiumDriver driver) {
+        String base64 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+        return base64;
     }
 
 

@@ -33,7 +33,7 @@ public class Library {
 
     @Test
     public void ClickOncart(){
-        driver.get().findElement(By.xpath("//android.widget.TextView[@text=\"Cart\"]")).click();
+       /* driver.get().findElement(By.xpath("//android.widget.TextView[@text=\"Cart\"]")).click();
         // driver.findElement(By.xpath("//android.widget.TextView[@text=\"Cart\"]")).click();
         // driver.get().findElement()
         driver.get().findElement(MobileBy.androidUIAutomator("new UiSelector().text(\"Place Order \")")).click();
@@ -43,7 +43,7 @@ public class Library {
             System.out.println("pass");
         }else{
             System.out.println("fail");
-        }
+        }*/
     }
 
 

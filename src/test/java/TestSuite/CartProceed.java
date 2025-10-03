@@ -27,10 +27,6 @@ public class CartProceed extends Hooks {
 
     }
 
-    public static String getBase64(AppiumDriver driver) {
-        String base64 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
-        return base64;
-    }
     @BeforeMethod
     public void setUpNode(Method method){
         node=test.createNode(method.getAnnotation(Test.class).description());
@@ -41,8 +37,9 @@ public class CartProceed extends Hooks {
         HomePage homePage = new HomePage(driver.get());
         MyCartPage myCartPage = new MyCartPage(driver.get());
         homePage.MycartClick();
-        String btnName=myCartPage.validateContinueBtnDisplay();
-        if(btnName.equals("sethu")){
+        myCartPage.PlaceOrderClick();
+        String btnName=myCartPage.ContinueBtnDisplay();
+        if(btnName.equalsIgnoreCase("continue")){
             System.out.println("pass");
            node.pass("Continue Button is displayed");
         }else{

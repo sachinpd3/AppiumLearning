@@ -1,28 +1,47 @@
 package Pages;
 
+import Utils.CommonUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
-public class MyCartPage {
+public class MyCartPage extends CommonUtils {
 
     AppiumDriver driver;
 
+    /*public MyCartPage(AppiumDriver driver) {
+        this.driver = driver;
+    }*/
+
     public MyCartPage(AppiumDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+        //  platform = StatusLogger.Config.getInstance().getPlatform();
     }
 
-    By PlaceOrder = MobileBy.androidUIAutomator("new UiSelector().text(\"Place Order \")");
-    By Continue = By.xpath("//android.widget.TextView[@text=\"Continue \"]");
+    @iOSXCUITFindBy(xpath = "test")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Continue \"]")
+    private WebElement Continue;
+
+    @iOSXCUITFindBy(xpath = "test")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Place Order \")")
+    private WebElement PlaceOrder;
+    //By PlaceOrder = MobileBy.androidUIAutomator("new UiSelector().text(\"Place Order \")");
+
 
     public void PlaceOrderClick(){
-        driver.findElement(PlaceOrder).click();
+
+        tapObject(PlaceOrder,"PlaceOrder");
     }
 
-public String validateContinueBtnDisplay(){
-        driver.findElement(PlaceOrder).click();
-        String getText=  driver.findElement(Continue).getText();
-        return getText;
+public String ContinueBtnDisplay(){
+    String getText= getElementValues(Continue,"Continue");
+    return getText;
 }
 
 }
